@@ -1,0 +1,24 @@
+[project]
+name = "cognisense"
+version = "0.1.0"
+description = "Multimodal Cognitive Load Detection System Using Behavioral, Visual, and Audio Biometrics"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+addopts = "-v --tb=short"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100

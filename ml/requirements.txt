@@ -1,0 +1,27 @@
+# CogniSense ML Dependencies
+numpy>=1.26.0
+pandas>=2.1.0
+scikit-learn>=1.4.0
+xgboost>=2.0.0
+joblib>=1.3.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+pyyaml>=6.0.0
+
+# Computer Vision
+opencv-python>=4.9.0
+mediapipe>=0.10.9
+
+# Audio (optional)
+librosa>=0.10.0
+sounddevice>=0.4.6
+
+# Input capture
+pynput>=1.7.6
+
+# Experiment tracking
+mlflow>=2.10.0
+
+# Notebooks
+jupyter>=1.0.0
+ipykernel>=6.28.0

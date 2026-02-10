@@ -1,0 +1,31 @@
+# Feature Configuration
+# ─────────────────────────────────────────────────────
+
+sampling:
+  window_sec: 5.0
+  stride_sec: 2.5
+  webcam_fps: 15
+
+# Feature toggles — set false to exclude a modality
+modalities:
+  visual: true
+  behavioral: true
+  audio: false  # Optional, requires mic
+
+# Per-modality feature lists (populated in Phase 3)
+visual_features:
+  enabled: true
+  count: 20  # Approximate
+
+behavioral_features:
+  enabled: true
+  count: 20
+
+audio_features:
+  enabled: false
+  count: 15
+
+# Normalization
+normalization:
+  method: "standard"  # standard | minmax | robust
+  fit_on_train_only: true

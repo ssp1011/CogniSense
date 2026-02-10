@@ -1,0 +1,57 @@
+# ─── Python ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+venv/
+.venv/
+*.so
+
+# ─── Environment ─────────────────────────────────────
+.env
+*.env.local
+
+# ─── Database ────────────────────────────────────────
+*.db
+*.sqlite3
+
+# ─── IDE ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── OS ──────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs ────────────────────────────────────────────
+logs/*.log
+
+# ─── ML Artifacts ────────────────────────────────────
+ml/saved_models/*.pkl
+ml/saved_models/*.joblib
+ml/saved_models/*.pt
+ml/experiments/
+ml/data/raw/
+ml/data/processed/
+
+# ─── Jupyter ─────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ─── Node / Frontend ────────────────────────────────
+frontend/node_modules/
+frontend/build/
+frontend/.env.local
+
+# ─── Docker ──────────────────────────────────────────
+*.log
+docker-compose.override.yml
+
+
+task.md

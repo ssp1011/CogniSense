@@ -1,0 +1,43 @@
+# ML Training Configuration
+# ─────────────────────────────────────────────────────
+
+experiment_name: "cognisense_v1"
+
+# Model selection: random_forest | xgboost | svm | ensemble
+model_type: "random_forest"
+
+# Hyperparameters per model
+random_forest:
+  n_estimators: 200
+  max_depth: 15
+  min_samples_split: 5
+  class_weight: "balanced"
+  random_state: 42
+
+xgboost:
+  n_estimators: 300
+  max_depth: 8
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  random_state: 42
+
+svm:
+  kernel: "rbf"
+  C: 1.0
+  gamma: "scale"
+  class_weight: "balanced"
+
+# Training settings
+training:
+  test_size: 0.2
+  val_size: 0.1
+  cv_folds: 5
+  scoring_metric: "f1_weighted"
+  random_state: 42
+
+# Labels
+labels:
+  - "low"
+  - "medium"
+  - "high"

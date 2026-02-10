@@ -1,0 +1,10 @@
+# CogniSense — Development Overrides
+
+app:
+  debug: true
+
+database:
+  url: "sqlite:///./cognisense_dev.db"
+
+capture:
+  fps: 10

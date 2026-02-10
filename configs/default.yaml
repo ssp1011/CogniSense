@@ -1,0 +1,26 @@
+# CogniSense — Default Configuration
+# ─────────────────────────────────────────────────────
+
+app:
+  name: CogniSense
+  version: 0.1.0
+  debug: false
+
+database:
+  url: "sqlite:///./cognisense.db"
+
+capture:
+  webcam_index: 0
+  fps: 15
+  audio_enabled: false
+  feature_window_sec: 5.0
+  feature_stride_sec: 2.5
+
+scoring:
+  model_type: "random_forest"
+  model_path: "ml/saved_models/latest.pkl"
+  confidence_threshold: 0.6
+
+cors:
+  origins:
+    - "http://localhost:3000"

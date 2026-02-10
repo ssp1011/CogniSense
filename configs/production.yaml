@@ -1,0 +1,11 @@
+# CogniSense — Production Overrides
+
+app:
+  debug: false
+
+scoring:
+  confidence_threshold: 0.7
+
+cors:
+  origins:
+    - "https://cognisense.example.com"
