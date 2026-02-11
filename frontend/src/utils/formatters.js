@@ -1,35 +1,25 @@
 // CogniSense — Utility Formatters
 
-/**
- * Format a load level string for display.
- * @param {string} level - "low" | "medium" | "high"
- * @returns {string} Capitalized level with emoji
- */
-export function formatLoadLevel(level) {
-    const map = {
-        low: "🟢 Low",
-        medium: "🟡 Medium",
-        high: "🔴 High",
-    };
-    return map[level] || "— Unknown";
+export function formatDuration(seconds) {
+    if (!seconds) return "0s";
+    const m = Math.floor(seconds / 60);
+    const s = Math.round(seconds % 60);
+    if (m === 0) return `${s}s`;
+    return `${m}m ${s}s`;
 }
 
-/**
- * Format a confidence score as percentage.
- * @param {number} confidence - 0.0 to 1.0
- * @returns {string}
- */
-export function formatConfidence(confidence) {
-    if (confidence == null) return "—";
-    return `${(confidence * 100).toFixed(1)}%`;
+export function formatTimestamp(iso) {
+    if (!iso) return "—";
+    const d = new Date(iso);
+    return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 }
 
-/**
- * Format an ISO timestamp for display.
- * @param {string} isoString
- * @returns {string}
- */
-export function formatTimestamp(isoString) {
-    if (!isoString) return "—";
-    return new Date(isoString).toLocaleTimeString();
+export function formatDate(iso) {
+    if (!iso) return "—";
+    const d = new Date(iso);
+    return d.toLocaleDateString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+}
+
+export function formatPercent(value) {
+    return `${Math.round((value || 0) * 100)}%`;
 }

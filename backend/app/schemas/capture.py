@@ -15,8 +15,6 @@ from app.schemas.common import Scenario
 class CaptureStartRequest(BaseModel):
     """Request to start a capture session."""
     scenario: Scenario = Scenario.GENERAL
-    webcam_enabled: bool = True
-    audio_enabled: bool = False
     notes: Optional[str] = None
 
 
@@ -25,6 +23,7 @@ class CaptureStartResponse(BaseModel):
     status: str
     session_id: str
     started_at: datetime
+    scenario: str
 
 
 class CaptureStopRequest(BaseModel):
@@ -37,3 +36,5 @@ class CaptureStopResponse(BaseModel):
     status: str
     session_id: str
     duration_sec: float
+    avg_load_score: Optional[float] = None
+    total_predictions: int = 0

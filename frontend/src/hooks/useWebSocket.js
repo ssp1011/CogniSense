@@ -1,24 +1,70 @@
-// CogniSense — WebSocket Hook for Live Scores
-// TODO: Implement in Phase 6
-import { useState, useEffect, useRef } from "react";
+// CogniSense — WebSocket Hook
+// Real-time cognitive load streaming
 
-export default function useWebSocket(url) {
+import { useState, useEffect, useRef, useCallback } from "react";
+
+const WS_URL = process.env.REACT_APP_WS_URL || "ws://localhost:8000/api/v1/ws/load";
+
+export default function useWebSocket(autoConnect = false) {
     const [data, setData] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
+    const [history, setHistory] = useState([]);
     const wsRef = useRef(null);
+    const reconnectRef = useRef(null);
+
+    const connect = useCallback(() => {
+        if (wsRef.current?.readyState === WebSocket.OPEN) return;
+
+        const ws = new WebSocket(WS_URL);
+
+        ws.onopen = () => {
+            setIsConnected(true);
+            console.log("[WS] Connected");
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const parsed = JSON.parse(event.data);
+                if (parsed.load_level) {
+                    setData(parsed);
+                    setHistory((prev) => [...prev.slice(-59), parsed]);
+                }
+            } catch (e) {
+                // ignore non-JSON
+            }
+        };
+
+        ws.onclose = () => {
+            setIsConnected(false);
+            console.log("[WS] Disconnected");
+            // Auto-reconnect after 3s
+            reconnectRef.current = setTimeout(() => connect(), 3000);
+        };
+
+        ws.onerror = () => {
+            ws.close();
+        };
+
+        wsRef.current = ws;
+    }, []);
+
+    const disconnect = useCallback(() => {
+        clearTimeout(reconnectRef.current);
+        wsRef.current?.close();
+        wsRef.current = null;
+        setIsConnected(false);
+    }, []);
+
+    const sendCommand = useCallback((action) => {
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
+            wsRef.current.send(JSON.stringify({ action }));
+        }
+    }, []);
 
     useEffect(() => {
-        if (!url) return;
-        const ws = new WebSocket(url);
-        wsRef.current = ws;
+        if (autoConnect) connect();
+        return () => disconnect();
+    }, [autoConnect, connect, disconnect]);
 
-        ws.onopen = () => setIsConnected(true);
-        ws.onmessage = (event) => setData(JSON.parse(event.data));
-        ws.onclose = () => setIsConnected(false);
-        ws.onerror = () => setIsConnected(false);
-
-        return () => ws.close();
-    }, [url]);
-
-    return { data, isConnected };
+    return { data, isConnected, history, connect, disconnect, sendCommand };
 }

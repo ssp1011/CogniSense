@@ -1,6 +1,5 @@
 // CogniSense — API Service
 // Axios wrapper for backend communication
-// TODO: Implement in Phase 6
 
 import axios from "axios";
 
@@ -13,15 +12,25 @@ const api = axios.create({
 });
 
 // ── Capture ─────────────────────────────────────────
-export const startCapture = (config) => api.post("/capture/start", config);
-export const stopCapture = (sessionId) => api.post("/capture/stop", { session_id: sessionId });
+export const startCapture = (scenario = "general", notes = "") =>
+    api.post("/capture/start", { scenario, notes });
+
+export const stopCapture = (sessionId) =>
+    api.post("/capture/stop", { session_id: sessionId });
+
+export const getSessionStatus = () => api.get("/capture/status");
 
 // ── Live Load ───────────────────────────────────────
 export const getLiveLoad = () => api.get("/load/live");
-export const getLoadHistory = (limit = 100) => api.get(`/load/history?limit=${limit}`);
+
+export const getLoadHistory = (sessionId, limit = 100) =>
+    api.get(`/load/history?session_id=${sessionId}&limit=${limit}`);
 
 // ── Analysis ────────────────────────────────────────
-export const analyzeInterview = () => api.post("/interview/analyze");
-export const analyzeExam = () => api.post("/exam/analyze");
+export const analyzeInterview = (sessionId) =>
+    api.post(`/interview/analyze?session_id=${sessionId}`);
+
+export const analyzeExam = (sessionId) =>
+    api.post(`/exam/analyze?session_id=${sessionId}`);
 
 export default api;
