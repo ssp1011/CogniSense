@@ -10,7 +10,7 @@ sampling:
 modalities:
   visual: true
   behavioral: true
-  audio: false  # Optional, requires mic
+  audio: true
 
 # Per-modality feature lists (populated in Phase 3)
 visual_features:
@@ -22,7 +22,7 @@ behavioral_features:
   count: 20
 
 audio_features:
-  enabled: false
+  enabled: true
   count: 15
 
 # Normalization

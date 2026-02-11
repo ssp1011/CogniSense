@@ -36,7 +36,7 @@ class Settings(BaseSettings):
 
     # ── Capture ──────────────────────────────────────────────────────
     WEBCAM_INDEX: int = 0
-    AUDIO_ENABLED: bool = False
+    AUDIO_ENABLED: bool = True
     CAPTURE_FPS: int = 15
     FEATURE_WINDOW_SEC: float = 5.0
 

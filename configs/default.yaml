@@ -12,7 +12,7 @@ database:
 capture:
   webcam_index: 0
   fps: 15
-  audio_enabled: false
+  audio_enabled: true
   feature_window_sec: 5.0
   feature_stride_sec: 2.5
 
